@@ -1,5 +1,4 @@
 import { getPreferenceValues, trash } from "@raycast/api";
-import type { Preferences } from "@raycast/api";
 import * as fs from "fs/promises";
 import * as path from "path";
 import * as os from "os";
@@ -16,7 +15,10 @@ function getDefaultStoragePath(): string {
 }
 
 export function getStoragePath(): string {
-  const prefs = getPreferenceValues<Preferences>();
+  const prefs = getPreferenceValues<{
+    syncFolder?: string;
+    defaultEditor?: string;
+  }>();
   return prefs.syncFolder || getDefaultStoragePath();
 }
 

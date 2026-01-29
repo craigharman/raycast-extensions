@@ -5,7 +5,6 @@ import {
   Icon,
   getPreferenceValues,
 } from "@raycast/api";
-import type { Preferences } from "@raycast/api";
 import { useState, useMemo } from "react";
 import type { SearchResult } from "../types";
 import { searchInContent } from "../lib/search";
@@ -26,7 +25,10 @@ export function SearchResults({
 }: Props) {
   const [searchText, setSearchText] = useState(initialQuery);
   const { document } = useDocument(documentId);
-  const prefs = getPreferenceValues<Preferences>();
+  const prefs = getPreferenceValues<{
+    syncFolder?: string;
+    defaultEditor?: string;
+  }>();
 
   const results = useMemo(() => {
     if (!searchText.trim()) return [];

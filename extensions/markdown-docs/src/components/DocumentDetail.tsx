@@ -6,7 +6,6 @@ import {
   useNavigation,
   getPreferenceValues,
 } from "@raycast/api";
-import type { Preferences } from "@raycast/api";
 import { useMemo } from "react";
 import { useDocument } from "../hooks/useDocuments";
 import { getDocumentFilePath } from "../lib/storage";
@@ -26,7 +25,10 @@ export function DocumentDetail({
 }: Props) {
   const { push } = useNavigation();
   const { document, content, isLoading } = useDocument(documentId);
-  const prefs = getPreferenceValues<Preferences>();
+  const prefs = getPreferenceValues<{
+    syncFolder?: string;
+    defaultEditor?: string;
+  }>();
 
   const filePath = document ? getDocumentFilePath(document.filename) : "";
 
